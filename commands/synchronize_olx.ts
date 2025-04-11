@@ -3,17 +3,17 @@ import { DateTime } from "luxon";
 import { BaseCommand } from "@adonisjs/core/ace";
 import type { CommandOptions } from "@adonisjs/core/types/ace";
 
-//import SearchQuery from "#models/search_query";
 import OlxOffer from "../app/types/olx_offer.js";
 
 export default class SynchronizeOlx extends BaseCommand {
   static commandName = "synchronize:olx";
   static description = "";
 
-  static options: CommandOptions = {};
+  static options: CommandOptions = {
+    startApp: true,
+  };
 
   async run() {
-    await this.app.boot();
     const { default: SearchQuery } = await import("#models/search_query");
     const queries = await SearchQuery.all();
     for (const query of queries) {
@@ -36,8 +36,8 @@ export default class SynchronizeOlx extends BaseCommand {
       const data = (await response.json()) as { data: OlxOffer[] };
 
       for (const offer of data.data) {
-        this.logger.info(
-          `[success] Znaleziono mieszkanie spełniające wymagania:${offer.title}`,
+        this.logger.success(
+          `Znaleziono mieszkanie spełniające wymagania:${offer.title}`,
         );
       }
 
