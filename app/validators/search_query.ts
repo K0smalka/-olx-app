@@ -6,5 +6,6 @@ export const createSearchQueryValidator = vine.compile(
     priceMin: vine.number().positive(),
     priceMax: vine.number().positive(),
     locationId: vine.number(),
+    email: vine.string(),
   }),
 );

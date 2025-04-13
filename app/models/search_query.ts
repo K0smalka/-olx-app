@@ -18,6 +18,9 @@ export default class SearchQuery extends BaseModel {
   @column()
   declare locationId: number;
 
+  @column()
+  declare email: string;
+
   @column.dateTime()
   declare refreshedAt: DateTime;
 

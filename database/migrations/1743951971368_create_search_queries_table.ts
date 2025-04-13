@@ -14,6 +14,8 @@ export default class extends BaseSchema {
 
       table.integer("location_id");
 
+      table.string("email");
+
       table.timestamp("refreshed_at");
 
       table.timestamp("created_at");
