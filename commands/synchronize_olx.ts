@@ -4,6 +4,8 @@ import { BaseCommand } from "@adonisjs/core/ace";
 import type { CommandOptions } from "@adonisjs/core/types/ace";
 import Mail from "@adonisjs/mail/services/main";
 
+import env from "#start/env";
+
 import OlxOffer from "../app/types/olx_offer.js";
 
 export default class SynchronizeOlx extends BaseCommand {
@@ -35,7 +37,6 @@ export default class SynchronizeOlx extends BaseCommand {
 
       const response = await fetch(url.toString());
       const data = (await response.json()) as { data: OlxOffer[] };
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
       for (const offer of data.data) {
         this.logger.success(
@@ -44,7 +45,7 @@ export default class SynchronizeOlx extends BaseCommand {
         this.logger.info(`https://www.olx.pl/d/oferta/${offer.id}`);
         await Mail.send((message) => {
           message
-            .from("test@solvro.pl")
+            .from(env.get("SMTP_USERNAME"))
             .to(query.email)
             .subject("Nowa oferta OLX spełniająca Twoje kryteria!")
             .htmlView("emails/offer", {

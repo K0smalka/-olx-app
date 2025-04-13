@@ -20,8 +20,8 @@ const mailConfig = defineConfig({
        */
       auth: {
         type: "login",
-        user: "test@solvro.pl",
-        pass: "RDalp614Ka7InN",
+        user: env.get("SMTP_USERNAME"),
+        pass: env.get("SMTP_PASSWORD"),
       },
     }),
   },
