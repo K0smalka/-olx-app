@@ -35,7 +35,7 @@ export default class SynchronizeOlx extends BaseCommand {
 
       const response = await fetch(url.toString());
       const data = (await response.json()) as { data: OlxOffer[] };
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
       for (const offer of data.data) {
         this.logger.success(
