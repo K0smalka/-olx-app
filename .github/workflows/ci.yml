@@ -26,7 +26,8 @@ jobs:
       - name: Set up AdonisJS environment
         run: |
           cp .env.example .env
-          node ace generate:key
+          APP_KEY=$(node ace generate:key | tail -1)
+          echo "APP_KEY=${APP_KEY}" >> .env
 
       - name: Check commit name
         if: github.event_name == 'pull_request'
