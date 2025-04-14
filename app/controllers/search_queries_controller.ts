@@ -11,7 +11,7 @@ export default class SearchQueriesController {
     return response.created(searchQuery);
   }
 
-  public async update({ request, response, params }: HttpContext) {
+  async update({ request, response, params }: HttpContext) {
     const payload = await request.validateUsing(updateSearchQueryValidator);
 
     const searchQuery = await SearchQuery.find(params.id);
