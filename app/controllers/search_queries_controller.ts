@@ -11,20 +11,14 @@ export default class SearchQueriesController {
     return response.created(searchQuery);
   }
 
-  async update({ request, response, params }: HttpContext) {
+  async update({ request, params }: HttpContext) {
     const payload = await request.validateUsing(updateSearchQueryValidator);
 
-    const searchQuery = await SearchQuery.find(params.id);
-
-    if (searchQuery === null) {
-      return response
-        .status(404)
-        .json({ message: "Rekord nie został znaleziony" });
-    }
+    const searchQuery = await SearchQuery.findOrFail(params.id);
 
     searchQuery.merge(payload);
     await searchQuery.save();
 
-    return response.ok(searchQuery);
+    return { message: "Successfully updated search query", searchQuery };
   }
 }
