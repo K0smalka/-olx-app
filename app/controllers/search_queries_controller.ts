@@ -9,4 +9,17 @@ export default class SearchQueriesController {
     const searchQuery = await SearchQuery.create(data);
     return response.created(searchQuery);
   }
+
+  async delete({ params, response }: HttpContext) {
+    const query = await SearchQuery.find(params.id);
+
+    if (query === null) {
+      return response.status(404).json({ message: "Search query not found" });
+    }
+
+    await query.delete();
+    return response
+      .status(200)
+      .json({ message: "Search query deleted successfully" });
+  }
 }
