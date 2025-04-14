@@ -19,7 +19,6 @@ router.get("/", async () => {
 
 router.post("/test", [SearchQueriesController, "store"]);
 
-router.delete("/api/v1/search-queries/:id", [
-  SearchQueriesController,
-  "delete",
-]);
+router
+  .resource("/api/v1/search-queries", SearchQueriesController)
+  .only(["destroy"]);
