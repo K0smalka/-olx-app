@@ -18,3 +18,5 @@ router.get("/", async () => {
 });
 
 router.post("/test", [SearchQueriesController, "store"]);
+
+router.put("/api/v1/search-queries/:id", [SearchQueriesController, "update"]);
