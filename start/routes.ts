@@ -13,8 +13,6 @@ const SearchQueriesController = () =>
 
 router.post("/api/v1/search-queries", [SearchQueriesController, "store"]);
 
-router.post("/test", [SearchQueriesController, "store"]);
-
 router
   .resource("/api/v1/search-queries", SearchQueriesController)
   .only(["update"]);
