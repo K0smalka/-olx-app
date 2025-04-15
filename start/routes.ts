@@ -12,3 +12,7 @@ const SearchQueriesController = () =>
   import("#controllers/search_queries_controller");
 
 router.post("/api/v1/search-queries", [SearchQueriesController, "store"]);
+
+router
+  .resource("/api/v1/search-queries", SearchQueriesController)
+  .only(["destroy"]);
