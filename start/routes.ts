@@ -15,6 +15,10 @@ router.post("/api/v1/search-queries", [SearchQueriesController, "store"]);
 
 router
   .resource("/api/v1/search-queries", SearchQueriesController)
+  .only(["show", "index"]);
+
+router
+  .resource("/api/v1/search-queries", SearchQueriesController)
   .only(["update"]);
 
 router
